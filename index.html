@@ -26,7 +26,7 @@ margin:10px;
 button{
 padding:10px 20px;
 background:#881b48;
-color:white;
+color:rgb(241, 137, 155);
 border:none;
 cursor:pointer;
 }
@@ -44,15 +44,16 @@ margin-top:20px;
 <button onclick="buscar()">Buscar</button>
 <div id="resultado"></div>
 </div>
+
 <script>
 const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNPw-DqY-NEUmbfVz00JBcZnZIHifOaSFF-MQ_BDiT288bcGMXF6-gdj-5j0YPgzVceWil_Qhkk8z/pub?gid=832962079&single=true&output=csv";
 async function buscar(){
-let ci = document.getElementById("ci").value.trim().replace(/\s/g,'');
+let ci = document.getElementById("ci").value.trim();
 document.getElementById("resultado").innerHTML = "Buscando...";
 try{
-let response = await fetch("https://corsproxy.io/?" + url);
+let response=await fetch(url);
 let data = await response.text();
-let filas = data.split("\n");
+let filas=data.split(/\r?\n/);
 let encontrado = false;
 for(let i=1;i<filas.length;i++){
 let columnas = filas[i].split(",");
